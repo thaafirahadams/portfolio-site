@@ -1,76 +1,44 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 
-const projects = [
-  { title: "VELA Skincare", category: "Branding", image: "https://via.placeholder.com/800x600" },
-  { title: "NOIRÉ Film", category: "Motion", image: "https://via.placeholder.com/800x600" },
-  { title: "SORA Campaign", category: "Social", image: "https://via.placeholder.com/800x600" },
-  { title: "AVENIRÉ Shoot", category: "Photography", image: "https://via.placeholder.com/800x600" }
-];
-
 export default function Home() {
-  const [dark, setDark] = useState(true);
-
   return (
-    <div className={dark ? "dark" : ""}>
-      <main className="min-h-screen bg-white text-black dark:bg-black dark:text-white transition-all duration-500">
+    <main style={{ padding: "40px", fontFamily: "Helvetica, sans-serif" }}>
+      <motion.h1
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        style={{ fontSize: "64px", marginBottom: "10px" }}
+      >
+        thaafirah
+      </motion.h1>
 
-        {/* NAV */}
-        <div className="fixed top-0 w-full flex justify-between px-6 py-4 z-50">
-          <h1 className="tracking-wide lowercase">thaafirah</h1>
-          <button onClick={() => setDark(!dark)} className="border px-3 py-1 rounded-full text-sm">
-            {dark ? "light" : "dark"}
-          </button>
-        </div>
+      <p style={{ fontSize: "18px", marginBottom: "60px", opacity: 0.7 }}>
+        multidisciplinary creative — branding, photography, motion & digital
+      </p>
 
-        {/* HERO */}
-        <section className="h-screen flex flex-col justify-center items-center text-center px-6">
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-7xl md:text-9xl font-bold lowercase"
+      <div style={{ display: "grid", gap: "30px" }}>
+        {[
+          { title: "ELA Skincare", type: "Branding" },
+          { title: "NOIRÉ Film", type: "Motion" },
+          { title: "SORA Campaign", type: "Social" },
+          { title: "AVENIRÉ Shoot", type: "Photography" },
+        ].map((project, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ scale: 1.03 }}
+            style={{
+              padding: "30px",
+              border: "1px solid #ddd",
+              borderRadius: "12px",
+              cursor: "pointer",
+              transition: "0.3s",
+            }}
           >
-            thaafirah
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="mt-6 max-w-xl text-lg opacity-70"
-          >
-            multidisciplinary creative — branding, photography, motion & digital.
-          </motion.p>
-        </section>
-
-        {/* PROJECTS */}
-        <section className="px-6 py-20 grid md:grid-cols-2 gap-10">
-          {projects.map((p, i) => (
-            <motion.div key={i} whileHover={{ scale: 1.03 }} className="cursor-pointer group">
-              <div className="overflow-hidden rounded-2xl">
-                <motion.img
-                  src={p.image}
-                  className="w-full h-[400px] object-cover"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                />
-              </div>
-              <div className="mt-4 flex justify-between">
-                <h3>{p.title}</h3>
-                <span className="opacity-60 text-sm">{p.category}</span>
-              </div>
-            </motion.div>
-          ))}
-        </section>
-
-        {/* ABOUT */}
-        <section className="px-6 py-32 max-w-2xl mx-auto text-center">
-          <p>
-            Thaafirah is a multidisciplinary creative working across branding, photography, motion, and digital design.
-          </p>
-        </section>
-
-      </main>
-    </div>
+            <h2 style={{ margin: 0 }}>{project.title}</h2>
+            <p style={{ opacity: 0.6 }}>{project.type}</p>
+          </motion.div>
+        ))}
+      </div>
+    </main>
   );
 }
